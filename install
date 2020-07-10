@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]; then echo "root required" 1>&2; exit 1; fi
+
+setenforce 0
+sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+
+yum install -y yum-utils
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+yum makecache
+yum -y install docker-ce docker-ce-cli containerd.io
+
+/usr/bin/systemctl enable --now docker

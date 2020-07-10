@@ -2,7 +2,6 @@
 
 - hosts: all
   vars:
-    consul_node_name: "{{ ansible_dynamic_hostname }}"
     consul_servers: "{{ groups['all'] }}"
     consul_http_address: "{{ ansible_host }}"
     consul_bind_address: "{{ ansible_host }}"
@@ -14,7 +13,7 @@
     consul_enable_nginx_config: false
     consul_dns_config: true
     consul_recursors: ['8.8.8.8', '8.8.8.4']
-    consul_manage_service: false
+    consul_manage_service: true
     consul_is_server: true
     consul_join_at_start: false
     consul_retry_join: true
@@ -23,6 +22,7 @@
     consul_bootstrap_expect: 3
     consul_port_dns: 53
     consul_use_upstart: false
+    consul_use_systemd: true
     consul_home: /srv/consul
     consul_config_file: /etc/consul.json
     consul_leave_on_terminate: false
