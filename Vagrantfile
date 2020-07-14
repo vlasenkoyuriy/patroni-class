@@ -26,7 +26,8 @@ Vagrant.configure("2") do |config|
         vb.memory = "2048"
         vb.name = opts[:name]
         vb.cpus = 2
-    end
+      end
+      config.vm.provision "shell", inline: $provision_common
 
     if opts[:name] == boxes.last[:name]
       config.vm.provision "ansible" do |ansible|
@@ -40,7 +41,7 @@ Vagrant.configure("2") do |config|
 
   end
 
-  config.vm.provision "shell", inline: $provision_common
+  
   
   end
 
